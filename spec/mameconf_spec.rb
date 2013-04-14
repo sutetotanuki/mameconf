@@ -9,7 +9,7 @@ describe Mameconf do
       end.new
     end
 
-    it "returns default valeu if not present" do
+    it "returns default value if not present" do
       subject.host.should eq "localhost"
     end
 
