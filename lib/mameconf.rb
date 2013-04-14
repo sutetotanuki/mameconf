@@ -7,12 +7,16 @@ module Mameconf
   end
 
   module InstanceMethods
-    def initialize(options={})
+    def initialize_mameconf(options={})
       options.each do |key, value|
         method = "#{key}="
 
         __send__(method, value) if respond_to?(method)
       end
+    end
+    
+    def initialize(options={})
+      initialize_mameconf(options)
     end
   end
 
