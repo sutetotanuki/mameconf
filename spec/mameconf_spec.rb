@@ -6,15 +6,15 @@ describe Mameconf do
       Class.new do
         include Mameconf
         mameconf :host, default: "localhost"
-      end
+      end.new
     end
 
     it "returns default valeu if not present" do
-      subject.new.host.should eq "localhost"
+      subject.host.should eq "localhost"
     end
 
     it "allows to override default value" do
-      instance = subject.new
+      instance = subject
       instance.host = "google.com"
 
       instance.host.should eq "google.com"
