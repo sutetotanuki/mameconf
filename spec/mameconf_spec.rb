@@ -60,7 +60,7 @@ describe Mameconf do
     end
   end
 
-  describe "#inheritance" do
+  describe "inheritance" do
     before do
       @parent = Class.new do
         include Mameconf
