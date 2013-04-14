@@ -1,21 +1,27 @@
 require "spec_helper"
 
 describe Mameconf do
-  let(:included) {
-    class Included
-      include Mameconf
-    end
-  }
+  class Included
+    include Mameconf
+  end
 
   describe "defualt value" do
     subject do
-      included.class_eval do
+      Included.class_eval do
         mameconf :host, default: "localhost"
       end
+      Included
     end
 
     it "returns default valeu if not present" do
-      included.new.host.shoud eq "localhost"
+      subject.new.host.should eq "localhost"
+    end
+
+    it "allows override default value" do
+      instance = subject.new
+      instance.host = "google.com"
+
+      instance.host.should eq "google.com"
     end
   end
 end
