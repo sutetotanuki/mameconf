@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "spec_helper"
 
 describe Mameconf do
@@ -103,6 +104,22 @@ describe Mameconf do
 
     it "can initiate from constructor" do
       subject.new(host: "sibainu.com").host.should eq "sibainu.com"
+    end
+
+    context "override initializer on Sub Class" do
+      before do 
+        subject.class_eval do
+          def initialize(options)
+            # TODO: 本当はココになにも書かず初期化したい。
+            #       でも多分無理。
+            initialize_mameconf(options)
+          end
+        end
+      end
+
+      it "can initiate from constructor" do
+        subject.new(host: "sibainu.com").host.should eq "sibainu.com"
+      end
     end
   end
 end
