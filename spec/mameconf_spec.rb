@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Mameconf do
-  describe "defualt value" do
+  describe "basic behavor" do
     subject do
       Class.new do
         include Mameconf
