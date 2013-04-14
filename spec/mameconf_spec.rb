@@ -91,4 +91,18 @@ describe Mameconf do
       end
     end
   end
+
+  describe "#initialize" do
+    subject do
+      Class.new do
+        include Mameconf
+
+        mameconf :host, default: "localhost"
+      end
+    end
+
+    it "can initiate from constructor" do
+      subject.new(host: "sibainu.com").host.should eq "sibainu.com"
+    end
+  end
 end
