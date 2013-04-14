@@ -3,6 +3,17 @@ require "mameconf/version"
 module Mameconf
   def self.included(base)
     base.extend ClassMethods
+    base.__send__(:include, InstanceMethods)
+  end
+
+  module InstanceMethods
+    def initialize(options={})
+      options.each do |key, value|
+        method = "#{key}="
+
+        __send__(method, value) if respond_to?(method)
+      end
+    end
   end
 
   module ClassMethods
