@@ -19,6 +19,14 @@ describe Mameconf do
 
       instance.host.should eq "google.com"
     end
+
+    it "allows to set nil value to attribute" do
+      instance = subject
+      instance.host = "google.com"
+      instance.host = nil
+
+      instance.host.should be_nil
+    end
   end
 
   describe "#to_hash" do

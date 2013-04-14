@@ -18,7 +18,11 @@ module Mameconf
       default_value = options[:default]
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{name}
-          @#{name} ||= #{default_value.inspect}
+          if !instance_variables.include?(:@#{name})
+            @#{name} ||= #{default_value.inspect}
+          end
+            
+          @#{name}
         end
 
         def #{name}=(val)
