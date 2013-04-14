@@ -51,4 +51,36 @@ describe Mameconf do
       end
     end
   end
+
+  describe "#inheritance" do
+    before do
+      @parent = Class.new do
+        include Mameconf
+
+        mameconf :host, default: "localhost"
+      end
+
+      @sub = Class.new(@parent)
+    end
+
+    it "has mameconf attribute" do
+      @sub.new.host.should eq "localhost"
+    end
+
+    context "add new attribute on Sub Class" do
+      before do
+        @sub.class_eval do
+          mameconf :sub, default: "inu"
+        end
+      end
+      
+      it "has different memory space" do
+        @sub.new.sub.should eq "inu"
+
+        expect {
+          @parent.new.sub
+        }.to raise_error NoMethodError
+      end
+    end
+  end
 end
